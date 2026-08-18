@@ -39,11 +39,19 @@ const MENU_ITEMS = [
     img: 'assets/img/photo-02.jpg'
   },
   {
+    category: 'drinks',
+    name: 'Матча анчан-кокос',
+    desc: '400 мл · авторская матча на кокосовом молоке',
+    price: '330 ₽',
+    img: 'assets/img/matcha-blue.jpg',
+    top: true
+  },
+  {
     category: 'food',
     name: '«Зверский аппетит»',
     desc: '250/360 г · говядина, красный лук, маринованный огурец, руккола',
     price: '490 ₽ / 630 ₽',
-    img: 'assets/img/photo-03.jpg',
+    img: 'assets/img/sandwich-front.jpg',
     top: true
   },
   {
@@ -51,7 +59,7 @@ const MENU_ITEMS = [
     name: '«Острый на язык»',
     desc: '250/420 г · чоризо, соус чеддер, карамелизированный лук',
     price: '560 ₽ / 730 ₽',
-    img: 'assets/img/photo-04.jpg',
+    img: 'assets/img/sandwich-dramatic.jpg',
     top: true
   },
   {
@@ -60,23 +68,31 @@ const MENU_ITEMS = [
     desc: '80 г · заварной крем и карамель',
     price: '260 ₽',
     img: 'assets/img/photo-10.jpg'
+  },
+  {
+    category: 'food',
+    name: 'Круассан миндальный',
+    desc: 'С хрустящей миндальной корочкой',
+    price: '360 ₽',
+    img: 'assets/img/gallery-croissants.jpg'
   }
 ];
 
 // ============ Данные мерча (визуальные плейсхолдеры) ============
 const MERCH_ITEMS = [
-  { name: 'Худи оверсайз', desc: 'Плотный флис, вышитый логотип', icon: '🧥', color: '#AD3527' },
+  { name: 'Худи оверсайз', desc: 'Плотный флис, вышитый логотип', icon: '🧥', color: '#7A1526' },
   { name: 'Кепка', desc: 'Вышивка «Настроение»', icon: '🧢', color: '#D9864B' },
-  { name: 'Керамическая кружка', desc: 'Тот самый цвет из зала', icon: '☕', color: '#5A4438' },
-  { name: 'Тоут-бэг', desc: 'Плотный хлопок, на каждый день', icon: '👜', color: '#7E2318' }
+  { name: 'Керамическая кружка', desc: 'Тот самый цвет из зала', icon: '☕', color: '#5C3E45' },
+  { name: 'Тоут-бэг', desc: 'Плотный хлопок, на каждый день', icon: '👜', color: '#4E0C18' }
 ];
 
 const GALLERY_IMAGES = [
-  { img: 'assets/img/photo-06.jpg', alt: 'Зал кофейни «Настроение»', span: 'span-2' },
-  { img: 'assets/img/photo-08.jpg', alt: 'Кофемашина за барной стойкой' },
-  { img: 'assets/img/photo-09.jpg', alt: 'Барная стойка', span: 'span-2row' },
-  { img: 'assets/img/photo-11.jpg', alt: 'Гость со свежим сэндвичем' },
-  { img: 'assets/img/photo-15.jpg', alt: 'Сэндвич в руках гостя', span: 'span-2' }
+  { img: 'assets/img/gallery-croissants.jpg', alt: 'Круассаны на деревянном подносе', span: 'span-2row' },
+  { img: 'assets/img/matcha-blue.jpg', alt: 'Матча анчан-кокос со льдом' },
+  { img: 'assets/img/sandwich-dramatic.jpg', alt: 'Сэндвич в руках гостя, драматичный свет', span: 'span-2' },
+  { img: 'assets/img/gallery-guy-patio.jpg', alt: 'Гость на летней террасе' },
+  { img: 'assets/img/sandwich-front.jpg', alt: 'Сэндвич «Зверский аппетит»' },
+  { img: 'assets/img/photo-08.jpg', alt: 'Кофемашина за барной стойкой', span: 'span-2' }
 ];
 
 // ============ Данные журнала (заглушки — заполним реальными историями) ============
@@ -86,7 +102,7 @@ const JOURNAL_ITEMS = [
     title: 'Дегустация нового бленда',
     excerpt: 'Расскажем, когда и как попробовать первыми',
     date: 'Скоро',
-    img: 'assets/img/photo-08.jpg'
+    img: 'assets/img/journal-anons.jpg'
   },
   {
     tag: 'Команда',
@@ -100,7 +116,7 @@ const JOURNAL_ITEMS = [
     title: 'Как выглядит утро в «Настроение»',
     excerpt: 'Фото и небольшие истории с локации',
     date: 'Скоро',
-    img: 'assets/img/photo-06.jpg'
+    img: 'assets/img/journal-atmosphere.jpg'
   }
 ];
 
