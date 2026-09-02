@@ -1,20 +1,20 @@
 /* ============ Design tokens ============ */
 :root{
-  --cream: #F6EEE1;
-  --paper: #FBF6EC;
-  --cream-deep: #EEE1CB;
-  --espresso: #24121A;
-  --espresso-soft: #5C3E45;
-  --brick: #7A1526;
-  --brick-dark: #4E0C18;
-  --terracotta: #D9864B;
-  --gold: #C9A24A;
-  --line: rgba(36,18,26,.14);
+  --cream: #FFEDDD;
+  --paper: #FFF7ED;
+  --cream-deep: #F5DBBE;
+  --espresso: #520501;
+  --espresso-soft: #74332E;
+  --brick: #C34F3B;
+  --brick-dark: #A03B2A;
+  --terracotta: #C34F3B;
+  --gold: #C9CFDD;
+  --line: rgba(82,5,1,.14);
   --line-light: rgba(255,255,255,.22);
-  --shadow-soft: 0 30px 70px -30px rgba(36,18,26,.45);
-  --shadow-card: 0 18px 40px -22px rgba(36,18,26,.35);
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Instrument Sans', -apple-system, sans-serif;
+  --shadow-soft: 0 30px 70px -30px rgba(82,5,1,.5);
+  --shadow-card: 0 18px 40px -22px rgba(82,5,1,.4);
+  --font-display: 'Poppins', -apple-system, sans-serif;
+  --font-body: 'Libre Franklin', -apple-system, sans-serif;
   --radius: 22px;
   --radius-sm: 12px;
   --container: 1240px;
@@ -64,7 +64,7 @@ button{ font-family: inherit; cursor:pointer; }
 
 .section-title{
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 700;
   font-size: clamp(2.1rem, 4vw, 3.2rem);
   line-height: 1.08;
   margin: 0 0 20px;
@@ -113,12 +113,12 @@ button{ font-family: inherit; cursor:pointer; }
   width: 38px; height: 38px; border-radius: 50%;
   border: 1.5px solid var(--espresso);
   display:flex; align-items:center; justify-content:center;
-  font-family: var(--font-display); font-style: italic; font-weight: 600;
-  font-size: 1.15rem; flex-shrink:0;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.1rem; flex-shrink:0;
 }
 .logo-word{
-  font-family: var(--font-display); font-weight: 600; font-size: 1.2rem;
-  letter-spacing: -.01em;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+  letter-spacing: .01em; text-transform: uppercase;
 }
 .main-nav{ display:flex; align-items:center; gap: 30px; }
 .main-nav a:not(.header-cta){
@@ -141,23 +141,6 @@ button{ font-family: inherit; cursor:pointer; }
 .burger.is-open span:nth-child(1){ transform: translateY(11px) rotate(45deg); }
 .burger.is-open span:nth-child(2){ opacity:0; }
 .burger.is-open span:nth-child(3){ transform: translateY(-11px) rotate(-45deg); }
-
-/* ============ Marquee ============ */
-.marquee{
-  background: var(--brick); color: var(--paper);
-  overflow: hidden; white-space: nowrap; border-bottom: 1px solid rgba(0,0,0,.08);
-}
-.marquee-track{
-  display: inline-flex; align-items:center; gap: 14px;
-  padding: 10px 0; animation: scroll-left 26s linear infinite;
-  font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600;
-}
-.marquee-track span{ padding: 0 2px; }
-.marquee-track .dot{ color: var(--terracotta); }
-@keyframes scroll-left{
-  from{ transform: translateX(0); }
-  to{ transform: translateX(-50%); }
-}
 
 /* ============ Hero ============ */
 .hero{
@@ -183,8 +166,8 @@ button{ font-family: inherit; cursor:pointer; }
 }
 .hero-content{ color: var(--paper); }
 .hero-title-clean{
-  font-family: var(--font-display); font-style: italic; font-weight: 500;
-  font-size: clamp(3.4rem, 8vw, 6.4rem); line-height: .95; letter-spacing: -.02em;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(2.8rem, 6.6vw, 5.4rem); line-height: .98; letter-spacing: -.01em;
   margin: 10px 0 22px;
 }
 .hero-text{ max-width: 440px; font-size: 1.08rem; color: rgba(251,246,236,.86); margin: 0 0 28px; }
@@ -208,6 +191,27 @@ button{ font-family: inherit; cursor:pointer; }
 @keyframes mascot-float{
   0%, 100%{ transform: translateY(0) rotate(-1.5deg); }
   50%{ transform: translateY(-16px) rotate(1.5deg); }
+}
+
+.hero-deco{
+  position:absolute; z-index:1; pointer-events:none; opacity:.9;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,.4));
+}
+.hero-deco-left{
+  left: -6%; bottom: -6%; width: 30%; max-width: 380px;
+  animation: deco-float-left 7s ease-in-out infinite;
+}
+.hero-deco-right{
+  right: -8%; top: 10%; width: 26%; max-width: 340px;
+  animation: deco-float-right 8s ease-in-out infinite;
+}
+@keyframes deco-float-left{
+  0%, 100%{ transform: translateY(0) rotate(0deg); }
+  50%{ transform: translateY(-12px) rotate(-2deg); }
+}
+@keyframes deco-float-right{
+  0%, 100%{ transform: translateY(0) rotate(0deg); }
+  50%{ transform: translateY(14px) rotate(2deg); }
 }
 
 .scroll-cue{
@@ -369,7 +373,7 @@ button{ font-family: inherit; cursor:pointer; }
 .site-footer{ background: var(--espresso); color: var(--paper); padding: 56px 0 34px; }
 .footer-inner{ display:flex; flex-direction:column; align-items:center; text-align:center; gap: 16px; }
 .logo-footer .logo-mark{ border-color: var(--paper); }
-.footer-tagline{ font-family: var(--font-display); font-style:italic; color: rgba(251,246,236,.7); margin:0; }
+.footer-tagline{ font-family: var(--font-display); font-weight:500; letter-spacing:.02em; color: rgba(251,246,236,.7); margin:0; }
 .socials-footer{ margin: 6px 0; }
 .footer-copy{ font-size:.8rem; color: rgba(251,246,236,.45); margin: 10px 0 0; }
 
@@ -404,6 +408,7 @@ button{ font-family: inherit; cursor:pointer; }
   .hero-actions{ justify-content:center; }
   .hero-mascot{ order:2; }
   .hero-mascot img{ max-width: 340px; }
+  .hero-deco{ display:none; }
   .contacts-grid{ grid-template-columns: 1fr; }
   .about{ padding: 110px 0 100px; }
   .menu-grid{ grid-template-columns: repeat(2,1fr); }
