@@ -78,14 +78,6 @@ const MENU_ITEMS = [
   }
 ];
 
-// ============ Данные мерча (визуальные плейсхолдеры) ============
-const MERCH_ITEMS = [
-  { name: 'Худи оверсайз', desc: 'Плотный флис, вышитый логотип', icon: '🧥', color: '#7A1526' },
-  { name: 'Кепка', desc: 'Вышивка «Настроение»', icon: '🧢', color: '#D9864B' },
-  { name: 'Керамическая кружка', desc: 'Тот самый цвет из зала', icon: '☕', color: '#5C3E45' },
-  { name: 'Тоут-бэг', desc: 'Плотный хлопок, на каждый день', icon: '👜', color: '#4E0C18' }
-];
-
 const GALLERY_IMAGES = [
   { img: 'assets/img/gallery-croissants.jpg', alt: 'Круассаны на деревянном подносе', span: 'span-2row' },
   { img: 'assets/img/matcha-blue.jpg', alt: 'Матча анчан-кокос со льдом' },
@@ -97,50 +89,38 @@ const GALLERY_IMAGES = [
   { img: 'assets/img/gallery-sandwich-halves.jpg', alt: 'Сэндвич на бордовой скатерти' }
 ];
 
-// ============ Данные журнала (заглушки — заполним реальными историями) ============
-const JOURNAL_ITEMS = [
-  {
-    tag: 'Анонс',
-    title: 'Дегустация нового бленда',
-    excerpt: 'Расскажем, когда и как попробовать первыми',
-    date: 'Скоро',
-    img: 'assets/img/journal-anons.jpg'
-  },
-  {
-    tag: 'Команда',
-    title: 'Знакомьтесь с нашими бариста',
-    excerpt: 'Истории людей, которые варят вам кофе по утрам',
-    date: 'Скоро',
-    img: 'assets/img/photo-09.jpg'
-  },
-  {
-    tag: 'Атмосфера',
-    title: 'Как выглядит утро в «Настроение»',
-    excerpt: 'Фото и небольшие истории с локации',
-    date: 'Скоро',
-    img: 'assets/img/journal-atmosphere.jpg'
-  }
+// ============ Неслучайные моменты (bento) ============
+const MOMENTS_ITEMS = [
+  { type: 'event', tag: 'Анонс', title: 'Дегустация нового бленда', desc: 'Расскажем, когда и как попробовать первыми', img: 'assets/img/journal-anons.jpg' },
+  { type: 'event', tag: 'Анонс', title: 'Утренняя дискотека', desc: 'Винил, фильтр и рассвет на берегу — дата скоро в сторис', img: 'assets/img/journal-atmosphere.jpg' },
+  { type: 'detail', tag: 'Команда', title: 'Знакомьтесь с бариста', desc: 'Истории людей, которые варят вам кофе по утрам' },
+  { type: 'detail', tag: 'Деталь', title: 'Secret Menu', desc: 'Авторские миксы бариста, которых нет на доске — спроси у стойки' },
+  { type: 'detail', tag: 'Деталь', title: 'Плотная керамика', desc: 'Никаких бумажных стаканов внутри зала' }
 ];
 
-// ============ Рендер журнала ============
-const journalGrid = document.getElementById('journal-grid');
+// ============ Рендер моментов ============
+const momentsGrid = document.getElementById('momentsGrid');
 
-JOURNAL_ITEMS.forEach((item, i) => {
+MOMENTS_ITEMS.forEach((item, i) => {
   const card = document.createElement('article');
-  card.className = 'journal-card';
+  card.className = `bento-card is-${item.type}`;
   card.style.animationDelay = (i * 0.1) + 's';
-  card.innerHTML = `
-    <div class="journal-card-media">
-      <img src="${item.img}" alt="${item.title}" loading="lazy">
+  card.innerHTML = item.type === 'event' ? `
+    <img src="${item.img}" alt="${item.title}" loading="lazy" class="bento-card-img">
+    <div class="bento-card-scrim"></div>
+    <div class="bento-card-content">
+      <span class="bento-tag">${item.tag}</span>
+      <h3 class="bento-title">${item.title}</h3>
+      <p class="bento-desc">${item.desc}</p>
     </div>
-    <div class="journal-card-body">
-      <span class="journal-card-tag">${item.tag}</span>
-      <h3 class="journal-card-title">${item.title}</h3>
-      <p class="journal-card-excerpt">${item.excerpt}</p>
-      <span class="journal-card-date">${item.date}</span>
+  ` : `
+    <span class="bento-tag">${item.tag}</span>
+    <div>
+      <h3 class="bento-title">${item.title}</h3>
+      <p class="bento-desc">${item.desc}</p>
     </div>
   `;
-  journalGrid.appendChild(card);
+  momentsGrid.appendChild(card);
 });
 
 // ============ Рендер меню ============
@@ -150,23 +130,18 @@ function renderMenu(category) {
   menuGrid.innerHTML = '';
   const items = category === 'all' ? MENU_ITEMS : MENU_ITEMS.filter(item => item.category === category);
   items.forEach((item, i) => {
-    const card = document.createElement('article');
-    card.className = 'menu-card';
-    card.style.animationDelay = (i * 0.08) + 's';
-    card.innerHTML = `
-      <div class="menu-card-media">
-        <img src="${item.img}" alt="${item.name}" loading="lazy">
-        ${item.top ? '<span class="menu-card-badge">Топ</span>' : ''}
+    const row = document.createElement('div');
+    row.className = 'menu-row';
+    row.style.animationDelay = (i * 0.05) + 's';
+    row.innerHTML = `
+      <div class="menu-row-top">
+        <span class="menu-row-name">${item.name}${item.top ? '<span class="menu-row-badge">Топ</span>' : ''}</span>
+        <span class="menu-row-fill"></span>
+        <span class="menu-row-price">${item.price}</span>
       </div>
-      <div class="menu-card-body">
-        <div class="menu-card-top">
-          <span class="menu-card-name">${item.name}</span>
-          <span class="menu-card-price">${item.price}</span>
-        </div>
-        <p class="menu-card-desc">${item.desc}</p>
-      </div>
+      <p class="menu-row-desc">${item.desc}</p>
     `;
-    menuGrid.appendChild(card);
+    menuGrid.appendChild(row);
   });
 }
 
@@ -184,28 +159,14 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 renderMenu('all');
 
-// ============ Рендер мерча ============
-const merchGrid = document.getElementById('merch-grid');
-
-MERCH_ITEMS.forEach(item => {
-  const card = document.createElement('div');
-  card.className = 'merch-card';
-  card.style.background = item.color;
-  card.innerHTML = `
-    <span class="merch-badge">Скоро в продаже</span>
-    <span class="merch-card-icon">${item.icon}</span>
-    <span class="merch-name">${item.name}</span>
-    <span class="merch-desc">${item.desc}</span>
-    <button class="merch-btn" type="button">Уведомить о старте</button>
-  `;
-  merchGrid.appendChild(card);
-});
-
-merchGrid.addEventListener('click', (e) => {
-  const btn = e.target.closest('.merch-btn');
-  if (!btn || btn.classList.contains('is-done')) return;
-  btn.textContent = 'Спасибо! Уведомим ✓';
-  btn.classList.add('is-done');
+// ============ Форма мерча ============
+const merchSubmitBtn = document.getElementById('merchSubmit');
+merchSubmitBtn.addEventListener('click', () => {
+  const phrase = document.getElementById('merchPhrase').value.trim();
+  const contact = document.getElementById('merchContact').value.trim();
+  if (!phrase || !contact) return;
+  document.getElementById('merchFormWrap').style.display = 'none';
+  document.getElementById('merchThanks').classList.add('is-active');
 });
 
 // ============ Рендер галереи ============
@@ -255,6 +216,86 @@ openMenuModalBtn.addEventListener('click', openMenuModal);
 closeMenuModalBtn.addEventListener('click', closeMenuModal);
 menuModal.addEventListener('click', (e) => { if (e.target === menuModal) closeMenuModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenuModal(); });
+
+// ============ Тающий сэндвич при скролле ============
+const biteSection = document.querySelector('.bite-section');
+if (biteSection) {
+  const swLayers = {
+    top: document.getElementById('swTop'),
+    lettuce: document.getElementById('swLettuce'),
+    cheese: document.getElementById('swCheese'),
+    patty: document.getElementById('swPatty')
+  };
+  const biteDots = document.querySelectorAll('.bite-progress i');
+  const biteOrder = [swLayers.top, swLayers.lettuce, swLayers.cheese, swLayers.patty];
+
+  function applyBite(step) {
+    biteOrder.forEach((layer, i) => {
+      if (i < step) { layer.style.opacity = '0'; layer.style.transform = 'translateY(-40px)'; }
+      else { layer.style.opacity = '1'; layer.style.transform = 'none'; }
+    });
+    biteDots.forEach(d => d.classList.toggle('is-active', +d.dataset.step === step));
+  }
+  function onBiteScroll() {
+    const rect = biteSection.getBoundingClientRect();
+    const total = biteSection.offsetHeight - window.innerHeight;
+    const scrolled = -rect.top;
+    const progress = Math.min(1, Math.max(0, scrolled / total));
+    applyBite(Math.min(3, Math.floor(progress * 4)));
+  }
+  window.addEventListener('scroll', onBiteScroll, { passive: true });
+  onBiteScroll();
+}
+
+// ============ Колесо настроения ============
+const spinOverlay = document.getElementById('spinOverlay');
+const openSpinBtn = document.getElementById('openSpinBtn');
+const spinCloseBtn = document.getElementById('spinClose');
+const spinBtn = document.getElementById('spinBtn');
+const wheel = document.getElementById('wheel');
+const spinIntro = document.getElementById('spinIntro');
+const spinResult = document.getElementById('spinResult');
+const prizeTag = document.getElementById('prizeTag');
+const spinDoneBtn = document.getElementById('spinDone');
+
+const SPIN_PRIZES = ['Скидка 15%', 'Секретный десерт', 'Бесплатный круассан', 'Стикерпак'];
+let hasSpun = false;
+
+function openSpin() {
+  spinOverlay.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSpin() {
+  spinOverlay.classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+openSpinBtn.addEventListener('click', openSpin);
+spinCloseBtn.addEventListener('click', closeSpin);
+spinOverlay.addEventListener('click', (e) => { if (e.target === spinOverlay) closeSpin(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSpin(); });
+
+spinBtn.addEventListener('click', () => {
+  if (hasSpun) return;
+  hasSpun = true;
+  const index = Math.floor(Math.random() * SPIN_PRIZES.length);
+  const spins = 5;
+  const target = spins * 360 + (360 - (index * 90 + 45));
+  wheel.style.transform = `rotate(${target}deg)`;
+  spinBtn.disabled = true;
+  setTimeout(() => {
+    prizeTag.textContent = SPIN_PRIZES[index];
+    spinIntro.style.display = 'none';
+    spinResult.classList.add('is-active');
+    try { localStorage.setItem('nastroenie_spin_prize', SPIN_PRIZES[index]); } catch (e) {}
+  }, 4300);
+});
+spinDoneBtn.addEventListener('click', closeSpin);
+
+let alreadySpun = false;
+try { alreadySpun = !!localStorage.getItem('nastroenie_spin_prize'); } catch (e) {}
+if (!alreadySpun && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  setTimeout(openSpin, 7000);
+}
 
 // ============ Мобильное меню ============
 const burger = document.getElementById('burger');

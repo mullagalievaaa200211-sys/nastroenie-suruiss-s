@@ -50,9 +50,12 @@
     <img class="hero-deco hero-deco-right" src="assets/img/deco-sandwich-hand.png" alt="" aria-hidden="true">
     <div class="hero-inner">
       <div class="hero-content reveal">
-        <p class="eyebrow eyebrow-light">Авторская выпечка и кофе</p>
-        <h1 class="hero-title-clean">Настроение</h1>
-        <p class="hero-text">Спешелти-кофе и выпечка на закваске — атмосфера, в которую хочется возвращаться каждое утро.</p>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>Настроение // Сириус</span>
+        </div>
+        <h1 class="hero-title-clean">Не всё имеет смысл.<br>И слава богу.</h1>
+        <p class="hero-text">Твой главный спешелти — этот вайб.</p>
 
         <div class="hero-offer">
           <span class="hero-offer-icon">☕</span>
@@ -63,6 +66,8 @@
           <a href="#menu" class="btn btn-primary">Смотреть меню</a>
           <a href="#contacts" class="btn btn-ghost">Забронировать столик</a>
         </div>
+
+        <button class="hero-spin-link" id="openSpinBtn" type="button">☕ Крутани колесо настроения →</button>
       </div>
 
       <div class="hero-mascot reveal">
@@ -74,6 +79,35 @@
     </a>
   </section>
 
+  <!-- SPINNER MODAL -->
+  <div class="spin-overlay" id="spinOverlay" role="dialog" aria-modal="true" aria-labelledby="spinTitle">
+    <div class="spin-card">
+      <button class="spin-close" id="spinClose" aria-label="Закрыть">✕</button>
+
+      <div id="spinIntro">
+        <p class="spin-eyebrow">Настроение дня</p>
+        <h3 class="spin-title" id="spinTitle">Какое у тебя сегодня настроение? Прокрути и зафиксируй фаворита!</h3>
+        <div class="wheel-zone">
+          <div class="wheel-pointer" aria-hidden="true"></div>
+          <div class="wheel" id="wheel" aria-hidden="true">
+            <span class="wheel-label" style="transform:rotate(45deg);">Скидка 15%</span>
+            <span class="wheel-label" style="transform:rotate(135deg);">Секретный десерт</span>
+            <span class="wheel-label" style="transform:rotate(225deg);">Бесплатный круассан</span>
+            <span class="wheel-label" style="transform:rotate(315deg);">Стикерпак</span>
+            <div class="wheel-hub"></div>
+          </div>
+          <button class="btn btn-primary spin-btn" id="spinBtn" type="button">Крутить колесо</button>
+        </div>
+      </div>
+
+      <div class="spin-result" id="spinResult">
+        <span class="spin-prize-tag" id="prizeTag">Скидка 15%</span>
+        <p class="spin-result-text">Покажи этот экран бариста при заказе — и получи приз.</p>
+        <button class="btn btn-ghost-dark spin-skip" id="spinDone" type="button">Отлично, иду за кофе</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-bg" aria-hidden="true">
@@ -83,15 +117,15 @@
     <div class="section-inner">
       <div class="about-copy reveal">
         <p class="eyebrow eyebrow-light">О нас</p>
-        <h2 class="section-title section-title-light">Настроение — это не только про&nbsp;кофе</h2>
+        <h2 class="section-title section-title-light">Всё временно.<br>Даже этот сэндвич.</h2>
         <p class="about-text">
-          Мы печём с раннего утра: закваска подходит ночью, круассаны слоятся при нас, а зёрна для эспрессо
-          обжариваются небольшими партиями специально под наши бленды. «Настроение» — место, куда заходят
-          на пять минут за капучино и остаются на час за разговором.
+          Ничего не задерживается навсегда — ни очереди, ни список дел, составленный вчерашним оптимистом.
+          Заходи выдохнуть, съесть свежий круассан и пересобрать мысли.
         </p>
         <p class="about-text">
-          Тёплый свет, плотная керамика вместо бумажных стаканов внутри зала и плейлист, который мы
-          собираем сами — детали, из которых складывается атмосфера.
+          Мы печём с раннего утра: закваска подходит ночью, круассаны слоятся при нас, а зёрна для эспрессо
+          обжариваются небольшими партиями специально под наши бленды. Тёплый свет, плотная керамика вместо
+          бумажных стаканов внутри зала — детали, из которых складывается атмосфера.
         </p>
 
         <div class="stats-row">
@@ -117,18 +151,44 @@
     </div>
   </section>
 
-  <!-- JOURNAL -->
+  <!-- BITE SCROLLER -->
+  <section class="bite-section">
+    <div class="bite-sticky">
+      <div class="bite-grid">
+        <div class="bite-copy reveal">
+          <p class="eyebrow">Пауза посреди дня</p>
+          <h2 class="section-title">Настроение поднимается по кусочку</h2>
+          <p class="bite-text">Пролистай — и смотри, как тает сэндвич. Ровно так же незаметно пролетает пауза с чашкой кофе.</p>
+          <div class="bite-progress" aria-hidden="true">
+            <i data-step="0" class="is-active"></i><i data-step="1"></i><i data-step="2"></i><i data-step="3"></i>
+          </div>
+        </div>
+        <div class="sandwich" aria-hidden="true">
+          <div class="sw-layer sw-top" id="swTop"></div>
+          <div class="sw-layer sw-lettuce" id="swLettuce"></div>
+          <div class="sw-layer sw-patty" id="swPatty"></div>
+          <div class="sw-layer sw-cheese" id="swCheese"></div>
+          <div class="sw-layer sw-bottom" id="swBottom"></div>
+          <div class="sw-seed" style="left:30%;"></div>
+          <div class="sw-seed" style="left:46%;top:9.5%;"></div>
+          <div class="sw-seed" style="left:62%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOMENTS -->
   <section class="journal" id="journal">
     <div class="section-inner">
       <div class="section-head journal-head">
         <div>
           <p class="eyebrow">Из жизни кофейни</p>
           <h2 class="section-title">Неслучайные моменты</h2>
-          <p class="section-note">Скоро мы будем делиться здесь анонсами, историями команды и жизнью кофейни — как в соцсетях, только на сайте. Пока готовим первые темы.</p>
+          <p class="section-note">От утренних сетов до уютных деталей, которые обычно замечают только постоянные.</p>
         </div>
       </div>
 
-      <div class="journal-grid" id="journal-grid"></div>
+      <div class="bento" id="momentsGrid"></div>
     </div>
   </section>
 
@@ -196,14 +256,32 @@
 
   <!-- MERCH -->
   <section class="merch" id="merch">
-    <div class="section-inner">
-      <div class="section-head">
-        <p class="eyebrow eyebrow-light">Мерч</p>
+    <div class="section-inner merch-grid-layout">
+      <div class="merch-head reveal">
+        <p class="eyebrow eyebrow-light">Скоро</p>
         <h2 class="section-title section-title-light">Носи «Настроение» с&nbsp;собой</h2>
-        <p class="section-note section-note-light">Коллекция уже в пути — оставляем для неё место, пока шьём первую партию.</p>
+        <p class="section-note section-note-light">Готовим кастомный дроп худи, кепок и шопперов.</p>
+        <div class="merch-swatches" aria-hidden="true">
+          <div class="merch-swatch" style="background: var(--brick);">🧥</div>
+          <div class="merch-swatch" style="background: var(--gold);">🧢</div>
+          <div class="merch-swatch" style="background: var(--paper);">👜</div>
+        </div>
       </div>
 
-      <div class="merch-grid" id="merch-grid"></div>
+      <div class="merch-form reveal">
+        <div id="merchFormWrap">
+          <label for="merchPhrase">Предложи фразу или принт</label>
+          <textarea id="merchPhrase" rows="3" placeholder="«Не всё имеет смысл. И слава богу.»" required></textarea>
+          <label for="merchContact">Почта или Telegram для связи</label>
+          <input type="text" id="merchContact" placeholder="@ник или почта" required>
+          <button class="btn btn-primary" id="merchSubmit" type="button" style="width:100%;">Отправить идею</button>
+          <p class="merch-fine">* Автор фразы, которая пойдёт в печать, получит безлимитный кофе на полгода.</p>
+        </div>
+        <div class="merch-thanks" id="merchThanks">
+          <div class="merch-thanks-tag">Приняли ✓</div>
+          <p>Спасибо! Если выберем твою фразу для дропа — напишем сами.</p>
+        </div>
+      </div>
     </div>
   </section>
 
