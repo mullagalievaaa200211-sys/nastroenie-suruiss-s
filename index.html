@@ -25,6 +25,7 @@
       <a href="#menu">Меню</a>
       <a href="#about">О нас</a>
       <a href="#journal">Журнал</a>
+      <a href="#treats">Выпечка</a>
       <a href="#merch">Мерч</a>
       <a href="#gallery">Галерея</a>
       <a href="#contacts">Контакты</a>
@@ -76,7 +77,7 @@
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-bg" aria-hidden="true">
-      <img src="assets/img/hero-burgundy.jpg" alt="">
+      <img src="assets/img/about-sandwich-matcha.jpg" alt="">
       <div class="about-scrim"></div>
     </div>
     <div class="section-inner">
@@ -131,6 +132,30 @@
     </div>
   </section>
 
+  <!-- TREATS -->
+  <section class="treats" id="treats">
+    <div class="treats-banner reveal">
+      <img src="assets/img/gallery-croissants.jpg" alt="Круассаны на деревянном подносе">
+      <div class="treats-banner-scrim"></div>
+      <div class="treats-banner-copy">
+        <p class="eyebrow eyebrow-light">Наши хиты</p>
+        <h2 class="section-title section-title-light">Свежая выпечка каждый день</h2>
+      </div>
+    </div>
+    <div class="section-inner">
+      <div class="treats-cards">
+        <figure class="treats-card reveal">
+          <img src="assets/img/sandwich-front.jpg" alt="Сэндвич «Зверский аппетит» крупным планом">
+          <figcaption>«Зверский аппетит» — говядина, красный лук, маринованный огурец</figcaption>
+        </figure>
+        <figure class="treats-card reveal">
+          <img src="assets/img/treats-drink.jpg" alt="Голубой холодный напиток на бордовом стуле">
+          <figcaption>Матча анчан-кокос — авторский холодный напиток</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- MENU -->
   <section class="menu" id="menu">
     <div class="section-inner">
@@ -141,14 +166,33 @@
       </div>
 
       <div class="tabs" role="tablist" aria-label="Категории меню">
-        <button class="tab is-active" data-category="coffee" role="tab" aria-selected="true">Кофе</button>
+        <button class="tab is-active" data-category="all" role="tab" aria-selected="true">Все</button>
+        <button class="tab" data-category="coffee" role="tab" aria-selected="false">Кофе</button>
         <button class="tab" data-category="drinks" role="tab" aria-selected="false">Напитки</button>
         <button class="tab" data-category="food" role="tab" aria-selected="false">Еда и десерты</button>
       </div>
 
       <div class="menu-grid" id="menu-grid"></div>
+
+      <div class="menu-full-cta reveal">
+        <button class="btn btn-ghost-dark" id="openMenuModal" type="button">Смотреть полное меню</button>
+      </div>
     </div>
   </section>
+
+  <!-- MENU MODAL -->
+  <div class="menu-modal" id="menuModal" role="dialog" aria-modal="true" aria-label="Полное меню">
+    <div class="menu-modal-inner">
+      <button class="menu-modal-close" id="closeMenuModal" aria-label="Закрыть">✕</button>
+      <div class="menu-modal-pages" id="menuModalPages">
+        <img src="assets/img/menu-page-1.jpg" alt="Меню «Настроение», страница 1">
+        <img src="assets/img/menu-page-2.jpg" alt="Меню «Настроение», страница 2">
+      </div>
+      <div class="menu-modal-actions">
+        <a href="assets/files/nastroenie-menu.pdf" download class="btn btn-primary">Скачать PDF</a>
+      </div>
+    </div>
+  </div>
 
   <!-- MERCH -->
   <section class="merch" id="merch">

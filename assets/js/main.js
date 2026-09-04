@@ -92,7 +92,9 @@ const GALLERY_IMAGES = [
   { img: 'assets/img/sandwich-dramatic.jpg', alt: 'Сэндвич в руках гостя, драматичный свет', span: 'span-2' },
   { img: 'assets/img/gallery-guy-patio.jpg', alt: 'Гость на летней террасе' },
   { img: 'assets/img/sandwich-front.jpg', alt: 'Сэндвич «Зверский аппетит»' },
-  { img: 'assets/img/photo-08.jpg', alt: 'Кофемашина за барной стойкой', span: 'span-2' }
+  { img: 'assets/img/photo-08.jpg', alt: 'Кофемашина за барной стойкой', span: 'span-2' },
+  { img: 'assets/img/gallery-hands-sandwich.jpg', alt: 'Гость держит сэндвич и холодный напиток', span: 'span-2' },
+  { img: 'assets/img/gallery-sandwich-halves.jpg', alt: 'Сэндвич на бордовой скатерти' }
 ];
 
 // ============ Данные журнала (заглушки — заполним реальными историями) ============
@@ -146,7 +148,8 @@ const menuGrid = document.getElementById('menu-grid');
 
 function renderMenu(category) {
   menuGrid.innerHTML = '';
-  MENU_ITEMS.filter(item => item.category === category).forEach((item, i) => {
+  const items = category === 'all' ? MENU_ITEMS : MENU_ITEMS.filter(item => item.category === category);
+  items.forEach((item, i) => {
     const card = document.createElement('article');
     card.className = 'menu-card';
     card.style.animationDelay = (i * 0.08) + 's';
@@ -179,7 +182,7 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
-renderMenu('coffee');
+renderMenu('all');
 
 // ============ Рендер мерча ============
 const merchGrid = document.getElementById('merch-grid');
@@ -234,6 +237,24 @@ function closeLightbox() {
 lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+// ============ Модалка полного меню ============
+const menuModal = document.getElementById('menuModal');
+const openMenuModalBtn = document.getElementById('openMenuModal');
+const closeMenuModalBtn = document.getElementById('closeMenuModal');
+
+function openMenuModal() {
+  menuModal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenuModal() {
+  menuModal.classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+openMenuModalBtn.addEventListener('click', openMenuModal);
+closeMenuModalBtn.addEventListener('click', closeMenuModal);
+menuModal.addEventListener('click', (e) => { if (e.target === menuModal) closeMenuModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenuModal(); });
 
 // ============ Мобильное меню ============
 const burger = document.getElementById('burger');
